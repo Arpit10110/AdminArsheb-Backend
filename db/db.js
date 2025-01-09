@@ -1,0 +1,9 @@
+import mongoose from "mongoose";
+
+export const connectdb = async()=>{
+    mongoose.connect(process.env.Mongodb_url,{dbName:"Arsheb"}).then(()=>{
+        console.log("DB connected successfully");
+    }).catch((e)=>{
+        console.log(e);
+    })
+}
