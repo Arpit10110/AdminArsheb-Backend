@@ -23,3 +23,29 @@ export const acceptorder  = async(req, res) =>{
         })
     }
 }
+
+
+export const cancelorder  = async(req, res) =>{
+    try {
+            const {id,cancelmessage} = await req.body;
+
+            const order = await OrderModel.findById(id);
+
+            order.status ="cancel";
+
+            order.ordermessage = cancelmessage;
+
+            await order.save();
+
+            return res.json({
+                success: true,
+                message: "Order cancelled successfully"
+            })
+
+    } catch (error) {
+        return res.json({
+            success: false,
+            message: error.message
+        })
+    }
+}
